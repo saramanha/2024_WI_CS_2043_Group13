@@ -1,4 +1,4 @@
-package Team13;
+package Team13Project.develop;
 
 public class Member extends Person {
 	private static int MEMBERNUMBER = 1000;

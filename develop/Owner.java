@@ -1,4 +1,4 @@
-package Team13;
+package Team13Project.develop;
 
 public class Owner extends Person {
 	private static int gymID = 0023;
