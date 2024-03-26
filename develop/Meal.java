@@ -53,6 +53,10 @@ public class Meal {
         extraSide = extraIn;
         assignedMealNum++;
     }
+    
+    public String toString() {
+    	return "The meal is meal option " + mealNumber + "\n " + mainFood + " " + firstSide + " " + secondSide + " " + extraSide;
+    }
 
     /**
      * This method retrieves the number of a meal.

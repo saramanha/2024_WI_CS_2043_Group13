@@ -10,24 +10,19 @@ public Employee (String firstNameIn, String lastNameIn, String addressIn, String
 public int getID() {
 	return employeeID;
 }
-/**
-public MemberLevel updateLevel(int newLevel) {
-	
+public SessionBooking createBooking (int id, String type, String time) {
+	SessionBooking session = new SessionBooking (id, type, time);
+	session.toString();
+	return session;
 }
+/**
+
 
 public Financial getRenewalDate() {
 	return variable.getRenewDate();
 }
 public Financial updateRenewalDate(int newDate) {
 
-}
-public BookSession bookSession() {
-}
-public BookSession updateSession() {
-}
-public Diet listDiets() {
-}
-public Meal listMeals() {
-}
+
 */
 }

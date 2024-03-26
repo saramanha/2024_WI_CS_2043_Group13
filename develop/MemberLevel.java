@@ -1,14 +1,16 @@
 package Team13Project.develop;
 
 public class MemberLevel {
-	private int memberLevel = 1;
+	private static int levelHolder = 1;
+	private int memberLevel;
 	private String levelDescription;
 	private String levelPerks;
 
 public MemberLevel (String levelDescriptionIn, String levelPerksIn) {
+	this.memberLevel = levelHolder;
 	levelDescription = levelDescriptionIn;
 	levelPerks = levelPerksIn;
-	memberLevel++;
+	levelHolder++;
 }
 public int getLevel() {
 	return memberLevel;

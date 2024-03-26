@@ -39,13 +39,16 @@ public class SessionBooking {
      * @param typeIn The type of session.
      * @param timeIn The time of a session. 
      */
-    public SessionBooking(String typeIn, String timeIn) {
+    public SessionBooking(int memberIDIn, String typeIn, String timeIn) {
         sessionID = assignedID;
+        memberID = memberIDIn;
         sessionType = typeIn;
         sessionTime = timeIn;
         assignedID++;
     }
-
+    public String toString() {
+    	return "Session Info:" + "\n Type: " + sessionType + " For member " + memberID + "\n Time: " + sessionTime + "\n Cost: " + getSessionCost();
+    }
     /**
      * This method retrieves the ID number of a session.
      * @return The session ID.

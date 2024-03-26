@@ -20,4 +20,9 @@ public MemberLevel updateDescription(MemberLevel levelNumber, String newDescript
 	}
 	return levelNumber;
 }
+public Meal createMeal (String main, String side, String secondSide, String extra) {
+	Meal mealCreator = new Meal (main, side, secondSide, extra);
+	mealCreator.toString();
+	return mealCreator;
+}
 }

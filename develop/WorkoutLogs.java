@@ -27,5 +27,8 @@ public String getLogDetails() {
 public String getLogGoals() {
 	return sessionGoals;
 }
+public String toString() {
+	return "This session was done by " + memberID + "on " + sessionDate + sessionDetails + sessionGoals;
+}
 
 }
