@@ -15,14 +15,22 @@ public SessionBooking createBooking (int id, String type, String time) {
 	session.toString();
 	return session;
 }
-/**
-
-
-public Financial getRenewalDate() {
-	return variable.getRenewDate();
+public Transaction payment (int memberID, String date, double amount, String payMethod) {
+	Transaction transaction = new Transaction(memberID, date, amount, payMethod);
+	transaction.toString();
+	return transaction;
 }
-public Financial updateRenewalDate(int newDate) {
-
-
-*/
+public int checkMemberLevel(Member memberIn) {
+	return memberIn.getMemberLevel();
+}
+public String memberRenewDate(Member memberInDate) {
+	return memberInDate.renewDate();
+}
+public String updateMemRenewal(Member memberRenew, String currentDate) {
+	return memberRenew.updateRenew(currentDate);
+}
+public void updateSession(SessionBooking id, String newType, String newTime) {
+	id.setSessionType(newType);
+	id.setSessionTime(newTime);
+}
 }

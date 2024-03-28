@@ -25,4 +25,7 @@ public Meal createMeal (String main, String side, String secondSide, String extr
 	mealCreator.toString();
 	return mealCreator;
 }
+public String updateMemRenewal(Member memberRenew, String currentDate) {
+	return memberRenew.updateRenew(currentDate);
+}
 }

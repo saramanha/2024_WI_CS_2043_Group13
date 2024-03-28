@@ -1,13 +1,18 @@
 package Team13Project.develop;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Member extends Person {
 	private static int numberHolder = 1000;
 	private int memberNumber;
 	private int memberLevel;
+	private String dateJoined;
 
-public Member (String firstNameIn, String lastNameIn, String addressIn, String phoneNumberIn,String emailIn) {
+public Member (String firstNameIn, String lastNameIn, String addressIn, String phoneNumberIn,String emailIn, String dateJoinedIn) {
 	super(firstNameIn, lastNameIn, addressIn, phoneNumberIn, emailIn);
 	this.memberNumber = numberHolder;
+	dateJoined = dateJoinedIn;
 	numberHolder++;
 }
 public int getMemberID() {
@@ -21,15 +26,25 @@ public WorkoutLogs createLog(String sessionDate, String detailsIn, String goalsI
 	logentry.toString();
 	return logentry;
 }
+public String renewDate() {
 
-/**
-Need to finish when appropriate class is complete.
-public int checkRenewalDate() {
+    LocalDate joinDate = LocalDate.parse(dateJoined, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+    LocalDate dateOfRenewal = joinDate.plusMonths(6);
+
+    DateTimeFormatter renewalDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    return dateOfRenewal.format(renewalDate);
 }
 
-public String listTransactions() {
-	return
+public String updateRenew(String datePaid) {
+	LocalDate currentDate = LocalDate.parse(datePaid, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
-*/
+	LocalDate newRenewalDate = currentDate.plusMonths(6);
+	
+	DateTimeFormatter nextRenewalDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
+	return newRenewalDate.format(nextRenewalDate);
+}
 
 }
