@@ -1,4 +1,4 @@
-package com.mvc.demo;
+package gym.app.team13gymapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
