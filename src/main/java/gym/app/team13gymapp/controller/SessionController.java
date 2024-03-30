@@ -2,66 +2,41 @@ package gym.app.team13gymapp.controller;
 
 import gym.app.team13gymapp.model.Person;
 import gym.app.team13gymapp.model.Session;
-import gym.app.team13gymapp.repository.PersonRepository;
 import gym.app.team13gymapp.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SessionController {
 
-    private final SessionRepository personRepository;
+    private final SessionRepository sessionRepository;
 
     @Autowired
-    public SessionController(SessionRepository personRepository) {
-        this.personRepository = personRepository;
+    public SessionController(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
     }
 
-    @GetMapping("/session")
-    public String showPersonList(Model model) {
-        model.addAttribute("persons", personRepository.findAll());
-        model.addAttribute("git ", new Session());
-        return "session";
+    @GetMapping("/sessions")
+    public String showSessionList(Model model) {
+        model.addAttribute("sessions", sessionRepository.findAll());
+        model.addAttribute("session", new Session());
+        return "session"; // Change this to the correct template name, which seems to be "session.html"
     }
 
-    @GetMapping("/session/add")
-    public String addPersonForm(Model model) {
-        model.addAttribute("person", new Session());
+    @GetMapping("/sessions/add")
+    public String addSessionForm(Model model) {
+        model.addAttribute("session", new Session());
         return "add-session";
     }
 
-    @PostMapping("/session/add")
-    public String addPerson(Session person) {
-        personRepository.save(person);
-        return "redirect:/session";
+    @PostMapping("/sessions/add")
+    public String addSession(@ModelAttribute Session session) {
+        sessionRepository.save(session);
+        return "redirect:/sessions";
     }
-//
-//    @GetMapping("/persons/edit/{id}")
-//    public String editPersonForm(@PathVariable("id") long id, Model model) {
-//        Session person = personRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid Person Id:" + id));
-//        model.addAttribute("person", person);
-//        return "edit-person";
-//    }
-//
-//    @PostMapping("/persons/edit")
-//    public String updatePerson(@ModelAttribute("person") Session person) {
-//        personRepository.save(person);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/persons/delete/{id}")
-//    public String deletePerson(@PathVariable Long id) {
-//        Session person = personRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid Person Id:" + id));
-//        personRepository.delete(person);
-//        return "redirect:/person";
-//    }
+
+    // Other methods for editing and deleting sessions as per your requirements
 
 }
-

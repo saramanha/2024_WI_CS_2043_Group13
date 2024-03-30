@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Persons</title>
+    <title>Sessions</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,16 +37,18 @@
 </head>
 <body>
 
-<h2>Persons</h2>
-<!-- Display a list of persons in a table -->
+<h2>Sessions</h2>
+<!-- Display a list of sessions in a table -->
 <table>
     <tr>
-        <th>Sessions</th>
-        <th>Email</th>
+        <th>Member ID</th>
+        <th>Session Type</th>
+        <th>Session Time</th>
     </tr>
-    <tr th:each="person : ${persons}">
-        <td th:text="${person.userName}"></td>
-        <td th:text="${person.email}"></td>
+    <tr th:each="session : ${sessions}">
+        <td th:text="${session.memberID}"></td>
+        <td th:text="${session.sessionType}"></td>
+        <td th:text="${session.sessionTime}"></td>
     </tr>
 </table>
 
