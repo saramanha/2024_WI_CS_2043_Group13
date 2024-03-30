@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Edit Book</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Edit Book</h2>
+    <form th:action="@{/books/edit}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Author: <input type="text" th:field="*{author}" /></p>
+        <button type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

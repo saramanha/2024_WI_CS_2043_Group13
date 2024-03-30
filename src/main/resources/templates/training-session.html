@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sessions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {background-color: #f5f5f5;}
+
+        td {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Sessions</h2>
+<!-- Display a list of sessions in a table -->
+<table>
+    <tr>
+        <th>Member ID</th>
+        <th>Session Type</th>
+        <th>Session Time</th>
+    </tr>
+    <tr th:each="trainingSession : ${sessions}">
+        <td th:text="${trainingSession.getMemberID()}"></td>
+        <td th:text="${trainingSession.sessionType}"></td>
+        <td th:text="${trainingSession.sessionTime}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

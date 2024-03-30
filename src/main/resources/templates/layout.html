@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Layout</title>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a class="button" th:href="@{/}">Home</a></li>
+        <li><a class="button" th:href="@{/books/add}">Add Book</a></li>
+    </ul>
+</nav>
+<div layout:fragment="content">
+    <!-- content goes here -->
+</div>
+</body>
+</html>
