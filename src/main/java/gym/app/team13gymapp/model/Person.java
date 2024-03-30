@@ -19,10 +19,11 @@ public class Person {
     public Person() {
 
     }
-    public Person (String userNameIn, String emailIn, String passwordIn) {
+    public Person (String userNameIn, String emailIn, String passwordIn, String typeIn) {
         userName = userNameIn;
         email = emailIn;
         password = passwordIn;
+        type = typeIn;
     }
     public Long getId() {
         return id;
