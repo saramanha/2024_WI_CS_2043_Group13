@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
  */
 
 @Entity
-public class Session {
+public class TrainingSession {
 
     /**
      * The ID number for a session.
@@ -26,7 +26,7 @@ public class Session {
     /**
      * The ID number for the member booking a session.
      */
-    private int memberID;
+    private long memberID;
 
     /**
      * The type of session.
@@ -43,7 +43,7 @@ public class Session {
      */
     private static int assignedID = 100;
 
-    public Session(){
+    public TrainingSession(){
 
     }
     /**
@@ -52,7 +52,7 @@ public class Session {
      * @param typeIn The type of session.
      * @param timeIn The time of a session.
      */
-    public Session(int memberIDIn, String typeIn, String timeIn) {
+    public TrainingSession(int memberIDIn, String typeIn, String timeIn) {
         sessionID = assignedID;
         memberID = memberIDIn;
         sessionType = typeIn;
@@ -131,5 +131,13 @@ public class Session {
     }
     public void setPersonId(Long personIdIn){
         personId = personIdIn;
+    }
+
+    public long getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(long memberIDin) {
+        memberID = memberIDin;
     }
 }

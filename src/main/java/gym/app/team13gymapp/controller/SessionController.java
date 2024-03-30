@@ -1,7 +1,6 @@
 package gym.app.team13gymapp.controller;
 
-import gym.app.team13gymapp.model.Person;
-import gym.app.team13gymapp.model.Session;
+import gym.app.team13gymapp.model.TrainingSession;
 import gym.app.team13gymapp.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,19 +20,19 @@ public class SessionController {
     @GetMapping("/sessions")
     public String showSessionList(Model model) {
         model.addAttribute("sessions", sessionRepository.findAll());
-        model.addAttribute("session", new Session());
-        return "session"; // Change this to the correct template name, which seems to be "session.html"
+        model.addAttribute("session", new TrainingSession());
+        return "training-session"; // Change this to the correct template name, which seems to be "training-session.html"
     }
 
     @GetMapping("/sessions/add")
     public String addSessionForm(Model model) {
-        model.addAttribute("session", new Session());
+        model.addAttribute("session", new TrainingSession());
         return "add-session";
     }
 
     @PostMapping("/sessions/add")
-    public String addSession(@ModelAttribute Session session) {
-        sessionRepository.save(session);
+    public String addSession(@ModelAttribute TrainingSession trainingSession) {
+        sessionRepository.save(trainingSession);
         return "redirect:/sessions";
     }
 

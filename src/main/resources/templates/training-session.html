@@ -45,10 +45,10 @@
         <th>Session Type</th>
         <th>Session Time</th>
     </tr>
-    <tr th:each="session : ${sessions}">
-        <td th:text="${session.memberID}"></td>
-        <td th:text="${session.sessionType}"></td>
-        <td th:text="${session.sessionTime}"></td>
+    <tr th:each="trainingSession : ${sessions}">
+        <td th:text="${trainingSession.getMemberID()}"></td>
+        <td th:text="${trainingSession.sessionType}"></td>
+        <td th:text="${trainingSession.sessionTime}"></td>
     </tr>
 </table>
 
