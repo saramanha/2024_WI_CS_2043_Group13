@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+  <title>Add New Person</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <h3>Add a new person</h3>
+  <form action="#" th:action="@{/session/add}" th:object="${person}" method="post">
+    <p>Username: <input type="text" th:field="*{userName}" /></p>
+    <p>Email: <input type="text" th:field="*{email}" /></p>
+    <p>Password: <input type="text" th:field="*{password}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+  </form>
+</div>
+</body>
+</html>

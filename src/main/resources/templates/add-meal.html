@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+  <title>Add New Meal</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <h3>Add a new meal</h3>
+  <form action="#" th:action="@{/meals/add}" th:object="${meal}" method="post">
+    <p>Main Food: <input type="text" th:field="*{mainFood}" /></p>
+    <p>First Side: <input type="text" th:field="*{firstSide}" /></p>
+    <p>Second Side: <input type="text" th:field="*{secondSide}" /></p>
+    <p>Extra Side: <input type="text" th:field="*{extraSide}" /></p>
+    <p>Person ID: <input type="text" th:field="*{personId}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+  </form>
+</div>
+</body>
+</html>
