@@ -14,32 +14,17 @@ public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
         private int mealNumber;
-        private String mainFood;
-        private String firstSide;
-        private String secondSide;
-        private String extraSide;
-        private static int assignedMealNum = 1;
+        private String food;
+        private String side;
+        private int calories;
         private Long personId;
 
-        public Meal()
-        {
+        public Meal() {}
 
-        }
-        /**
-         * This method constructs a meal containing the main food of a meal, the first
-         * side of a meal, the second side of a meal, and any extra side foods of a meal.
-         * @param mainIn The main food of a meal.
-         * @param firstSideIn The first side food of a meal.
-         * @param secondSideIn The second side food of a meal.
-         * @param extraIn Any extra side food of a meal.
-         */
-        public Meal(String mainIn, String firstSideIn, String secondSideIn, String extraIn, Long personIdIn) {
-            mealNumber = assignedMealNum;
-            mainFood = mainIn;
-            firstSide = firstSideIn;
-            secondSide = secondSideIn;
-            extraSide = extraIn;
-            assignedMealNum++;
+        public Meal(String mainIn, String sideIn, int caloriesIn, Long personIdIn) {
+            food = mainIn;
+            side = sideIn;
+            calories = caloriesIn;
             personId = personIdIn;
         }
 
@@ -50,53 +35,33 @@ public class Meal {
         public void setPersonId(Long personIdIn){
             personId = personIdIn;
         }
-        public String toString() {
-            return "The meal is meal option " + mealNumber + "\n " + mainFood + " " + firstSide + " " + secondSide + " " + extraSide;
-        }
-
 
         public int getMealNum() {
             return mealNumber;
         }
 
-        public String getMainFood() {
-            return mainFood;
+        public String getFood() {
+            return food;
         }
 
-        public String getFirstSide() {
-            return firstSide;
+        public String getSide() {
+            return side;
+        }
+        public int getCalories() { return calories;}
+        public void setFood(String newFood) {
+            food = newFood;
         }
 
-
-        public String getSecondSide() {
-            return secondSide;
+        public void setSide(String newSide) {
+            side = newSide;
         }
 
+        public void setCalories(int caloriesIn) { calories = caloriesIn;}
 
-        public String getExtraSide() {
-            return extraSide;
-        }
-
-        public void setMainFood(String newMainFood) {
-            mainFood = newMainFood;
-        }
-
-        public void setFirstSide(String newFirstSide) {
-            firstSide = newFirstSide;
-        }
-
-        public void setSecondSide(String newSecondSide) {
-            secondSide = newSecondSide;
-        }
-
-        public void setExtraSide(String newExtraSide) {
-            extraSide = newExtraSide;
-        }
 
         public String getMealDescription() {
             return "Meal Info: \n  Meal Number: " + mealNumber + "\n  Main Food: " +
-                    mainFood + "\n  First Side: " + firstSide + "\n  Second Side: " +
-                    secondSide + "\n  Extra: " + extraSide;
+                    food + "\n  Side: " + side + "\n  Calories: " + calories;
         }
 
     }

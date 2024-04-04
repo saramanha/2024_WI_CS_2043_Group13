@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class MealController {
 
@@ -18,11 +20,18 @@ public class MealController {
     }
 
     @GetMapping("/meals")
-    public String showMealList(Model model) {
-        model.addAttribute("meals", mealRepository.findAll());
-        model.addAttribute("meal", new Meal());
+    public String showMealList(@RequestParam(name = "personId", required = false) Integer personId, Model model) {
+        if (personId != null) {
+            System.out.println("personID not null");
+            model.addAttribute("meals", mealRepository.findByPersonId(personId));
+        } else {
+            System.out.println("personID null");
+            model.addAttribute("meals", new ArrayList<>());
+        }
         return "meals";
     }
+
+
 
     @GetMapping("/meals/add")
     public String addMealForm(Model model) {
@@ -33,8 +42,9 @@ public class MealController {
     @PostMapping("/meals/add")
     public String addMeal(@ModelAttribute("meal") Meal meal) {
         mealRepository.save(meal);
-        return "redirect:/meals";
+        return "redirect:/meals?personId=" + meal.getPersonId();
     }
+
 
     @GetMapping("/meals/edit/{id}")
     public String editMealForm(@PathVariable("id") int id, Model model) {

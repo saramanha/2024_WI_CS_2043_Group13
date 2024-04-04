@@ -2,20 +2,22 @@ package gym.app.team13gymapp.controller;
 
 import gym.app.team13gymapp.model.Person;
 import gym.app.team13gymapp.repository.PersonRepository;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.*;
+import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
-//?just pass the info through the url and forget cookies?
+
 @Controller
 public class LoginController {
 
     private final PersonRepository personRepository;
+    private final String secretKey = "YourSecretKey"; // Define your secret key for signing JWTs
 
     @Autowired
     public LoginController(PersonRepository personRepository) {
@@ -28,23 +30,16 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+    @ResponseBody
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         Optional<Person> foundPerson = personRepository.findByUserName(username);
-        if (foundPerson.isPresent()) {
+        if (foundPerson.isPresent() && foundPerson.get().getPassword().equals(password)) {
             Person person = foundPerson.get();
-
-            if (person.getPassword().equals(password)) {
-                // Prepare user information for the cookie
-                String userInfo = person.getId() + "|" + person.getUserName() + "|" + person.getEmail();
-                // Create and configure the cookie
-                Cookie userCookie = new Cookie("userInfo", userInfo);
-                userCookie.setPath("/");
-                userCookie.setMaxAge(7 * 24 * 60 * 60); // For example, make the cookie last for 7 days
-                response.addCookie(userCookie);
-
-                return "redirect:/persons"; //redirect to protected page
-            }
+            person.setPassword(null); // Clear the password before sending it back
+            return ResponseEntity.ok().body(person);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login Failed");
         }
-        return "redirect:/login?error=true";
     }
+
 }

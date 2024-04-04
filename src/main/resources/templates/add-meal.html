@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Add New Meal</title>
 </head>
 <body>
-<div layout:fragment="content">
   <h3>Add a new meal</h3>
-  <form action="#" th:action="@{/meals/add}" th:object="${meal}" method="post">
-    <p>Main Food: <input type="text" th:field="*{mainFood}" /></p>
-    <p>First Side: <input type="text" th:field="*{firstSide}" /></p>
-    <p>Second Side: <input type="text" th:field="*{secondSide}" /></p>
-    <p>Extra Side: <input type="text" th:field="*{extraSide}" /></p>
-    <p>Person ID: <input type="text" th:field="*{personId}" /></p>
+  <form id="addMealForm" action="#" th:action="@{/meals/add}" th:object="${meal}" method="post">
+    <p>Main Food: <input type="text" th:field="*{food}" /></p>
+    <p>First Side: <input type="text" th:field="*{side}" /></p>
+    <p>Calories: <input type="text" th:field="*{calories}" /></p>
+    <!-- Hide Person ID input and make it readonly -->
+    <input id="personIdInput" type="hidden" th:field="*{personId}" readonly />
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
   </form>
-</div>
+<script>
+  console.log("script from add-meal");
+  document.addEventListener('DOMContentLoaded', function() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.id) {
+      document.getElementById('personIdInput').value = userInfo.id;
+    }
+  });
+
+</script>
 </body>
 </html>
