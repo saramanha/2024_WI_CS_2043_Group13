@@ -17,7 +17,6 @@ import java.util.Optional;
 public class LoginController {
 
     private final PersonRepository personRepository;
-    private final String secretKey = "YourSecretKey"; // Define your secret key for signing JWTs
 
     @Autowired
     public LoginController(PersonRepository personRepository) {

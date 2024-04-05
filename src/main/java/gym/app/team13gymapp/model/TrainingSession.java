@@ -35,6 +35,8 @@ public class TrainingSession {
 
     private double cost;
 
+    private String trainer = "N/A";
+
     public TrainingSession(){
 
     }
@@ -49,6 +51,13 @@ public class TrainingSession {
         sessionType = typeIn;
         sessionTime = timeIn;
         this.cost = cost;
+    }
+    public TrainingSession(long personId, String typeIn, String timeIn, int cost, String trainer) {
+        this.personId = personId;
+        sessionType = typeIn;
+        sessionTime = timeIn;
+        this.cost = cost;
+        this.trainer = trainer;
     }
     public String toString() {
         return "Session Info:" + "\n Type: " + sessionType + " For member " + personId + "\n Time: " + sessionTime + "\n Cost: " + getCost();
@@ -117,6 +126,14 @@ public class TrainingSession {
     }
     public void setPersonId(Long personIdIn){
         personId = personIdIn;
+    }
+
+    public String getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(String trainer) {
+        this.trainer = trainer;
     }
 
 }

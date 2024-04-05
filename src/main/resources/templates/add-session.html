@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Session</title>
   <style>
-    /* Add your CSS styles here */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -61,23 +60,55 @@
   </style>
 </head>
 <body>
-<div class="container">
-  <h1>Add New Session</h1>
-  <form action="#" method="post">
-    <label for="memberID">Member ID:</label>
-    <input type="text" id="memberID" name="memberID" required>
+<form action="#" method="post">
+  <label for="personIdInput">Member ID:</label>
+  <input type="text" id="personIdInput" name="personId" required>
 
-    <label for="sessionType">Session Type:</label>
-    <select id="sessionType" name="sessionType" required>
-      <option value="Private">Private</option>
-      <option value="Group">Group</option>
+  <label for="sessionType">Session Type:</label>
+  <select id="sessionType" name="sessionType" required onchange="checkForPersonalTraining()">
+    <option value="workout">Workout</option>
+    <option value="sauna">Sauna</option>
+    <option value="personal training">Personal Training</option>
+  </select>
+
+  <label for="sessionTime">Session Time:</label>
+  <input type="text" id="sessionTime" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" required>
+
+  <!-- Trainer dropdown, initially hidden -->
+  <div id="trainerSelection" style="display: none;">
+    <label for="trainer">Trainer:</label>
+    <select id="trainer" name="trainer">
+      <!-- dynamically generate these? -->
+      <option value="Jack C">Jack C</option>
+      <option value="Kyle A">Kyle A</option>
+      <option value="Ahmed B">Ahmed B</option>
     </select>
+  </div>
 
-    <label for="sessionTime">Session Time:</label>
-    <input type="text" id="sessionTime" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" required>
+  <input type="submit" value="Add Session">
+</form>
 
-    <input type="submit" value="Add Session">
-  </form>
-</div>
+<script>
+  function checkForPersonalTraining() {
+    var sessionType = document.getElementById("sessionType").value;
+    var trainerSelectionDiv = document.getElementById("trainerSelection");
+    var trainerSelect = document.getElementById("trainer");
+
+    if (sessionType === "personal training") {
+      trainerSelectionDiv.style.display = "block";
+      trainerSelect.setAttribute('name', 'trainer'); // Ensure the select has the name 'trainer' so its value is included in the form submission
+    } else {
+      trainerSelectionDiv.style.display = "none";
+      trainerSelect.removeAttribute('name'); // Remove the name attribute so that it's not included in the form submission
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.id) {
+      document.getElementById('personIdInput').value = userInfo.id;
+    }
+  });
+</script>
+
 </body>
 </html>

@@ -40,16 +40,22 @@
 <h2>Sessions</h2>
 <!-- Display a list of sessions in a table -->
 <table>
+    <thead>
     <tr>
         <th>Member ID</th>
         <th>Session Type</th>
         <th>Session Time</th>
+        <th>Trainer</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="trainingSession : ${sessions}">
-        <td th:text="${trainingSession.getMemberID()}"></td>
+        <td th:text="${trainingSession.personId}"></td>
         <td th:text="${trainingSession.sessionType}"></td>
         <td th:text="${trainingSession.sessionTime}"></td>
+        <td th:text="${trainingSession.trainer}"></td>
     </tr>
+    </tbody>
 </table>
 
 </body>

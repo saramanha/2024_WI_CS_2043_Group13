@@ -21,7 +21,7 @@ public class SessionController {
     public String showSessionList(Model model) {
         model.addAttribute("sessions", sessionRepository.findAll());
         model.addAttribute("session", new TrainingSession());
-        return "training-session"; // Change this to the correct template name, which seems to be "training-session.html"
+        return "training-session";
     }
 
     @GetMapping("/sessions/add")
@@ -35,7 +35,5 @@ public class SessionController {
         sessionRepository.save(trainingSession);
         return "redirect:/sessions";
     }
-
-    // Other methods for editing and deleting sessions as per your requirements
 
 }
