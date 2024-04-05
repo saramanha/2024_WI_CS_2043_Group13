@@ -14,16 +14,19 @@ public class Person {
     private String email;
     private String type;
 
+    private double spend;
+
     private String password;
 
     public Person() {
 
     }
-    public Person (String userNameIn, String emailIn, String passwordIn, String typeIn) {
+    public Person (String userNameIn, String emailIn, String passwordIn, String typeIn, double spendIn) {
         userName = userNameIn;
         email = emailIn;
         password = passwordIn;
         type = typeIn;
+        spend = spendIn;
     }
     public Long getId() {
         return id;
@@ -63,6 +66,14 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public double getSpend() {
+        return spend;
+    }
+
+    public void setSpend(double spend) {
+        this.spend = spend;
     }
 
     public String toString() {
