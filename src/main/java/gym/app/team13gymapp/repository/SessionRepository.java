@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SessionRepository extends CrudRepository<TrainingSession, Long> {
+    Object findByPersonId(Integer personId);
 }

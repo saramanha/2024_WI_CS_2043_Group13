@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class SessionController {
 
@@ -22,9 +24,14 @@ public class SessionController {
     }
 
     @GetMapping("/sessions")
-    public String showSessionList(Model model) {
-        model.addAttribute("sessions", sessionRepository.findAll());
-        model.addAttribute("session", new TrainingSession());
+    public String showSessionList(@RequestParam(name = "personId", required = false) Integer personId, Model model) {
+        if (personId != null) {
+            System.out.println("personID not null");
+            model.addAttribute("sessions", sessionRepository.findByPersonId(personId));
+        } else {
+            System.out.println("personID null");
+            model.addAttribute("sessions", new ArrayList<>());
+        }
         return "training-session";
     }
 
@@ -44,7 +51,7 @@ public class SessionController {
             person.setSpend(updatedSpend);
             personRepository.save(person);
         }
-        return "redirect:/sessions";
+        return "redirect:/sessions?personId=" + trainingSession.getPersonId();
     }
 
 }
