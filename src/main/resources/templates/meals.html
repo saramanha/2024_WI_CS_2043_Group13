@@ -1,12 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>Meals List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin : 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .btn {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <h1>Meals List</h1>
+    <div id="header">
+        <h1>Meals List</h1>
+    </div>
+
+    <img th:src="@{/add-meal.png}" alt="hello"/>
+
     <table>
         <thead>
         <tr>
@@ -25,15 +91,8 @@
         </tr>
         </tbody>
     </table>
-    <br>    <br>
+    <br><br>
     <a href="/meals/add" class="btn">Add New Meal</a>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("script from meals");
-
-    });
-
-</script>
 </body>
 </html>
