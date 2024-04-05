@@ -16,11 +16,6 @@
             padding: 10px;
             text-align: center;
         }
-        .logo {
-            text-align: left; /* Align the logo to the left */
-            margin-bottom: -50px; /* Adjust margin as needed */
-            margin-left: 25px;
-        }
 
         h1, h2 {
             text-align: center;
@@ -57,15 +52,13 @@
 <body>
 <div layout:fragment="content">
     <div id="header">
-        <div class="logo">
-            <img th:src="@{/logo.png}" alt="Your Logo" style="max-width: 100px; height: auto;">
-        </div>
         <h1>Sessions</h1>
     </div>
     <!-- Display a list of sessions in a table -->
     <table>
         <thead>
         <tr>
+            <th>Member ID</th>
             <th>Session Type</th>
             <th>Session Time</th>
             <th>Trainer</th>
@@ -73,6 +66,7 @@
         </thead>
         <tbody>
         <tr th:each="trainingSession : ${sessions}">
+            <td th:text="${trainingSession.personId}"></td>
             <td th:text="${trainingSession.sessionType}"></td>
             <td th:text="${trainingSession.sessionTime}"></td>
             <td th:text="${trainingSession.trainer}"></td>
