@@ -42,19 +42,30 @@
 <body>
 <nav>
     <ul>
-        <li><a th:href="@{/index}">Home</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
         <li><a th:href="@{/persons}">Persons</a></li>
         <li><a th:href="@{/persons/add}">Add Person</a></li>
         <li><a th:href="@{/sessions}">Sessions</a></li>
         <li><a th:href="@{/sessions/add}">Book Sessions</a></li>
         <li><a th:href="@{/meals}">Meal</a></li>
         <li><a th:href="@{/meals/add}">Add Meal</a></li>
+        <li><a id="invoiceLink" th:href="@{/invoice}">Invoice</a></li>
     </ul>
 </nav>
 
 <div layout:fragment="content">
     <!-- content goes here -->
 </div>
-
+<script>
+    console.log("script from add-meal");
+    document.addEventListener('DOMContentLoaded', function() {
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (userInfo && userInfo.id) {
+            // Update the invoice link href with personId parameter
+            const invoiceLink = document.getElementById('invoiceLink');
+            invoiceLink.href = `/invoice?personId=${userInfo.id}`;
+        }
+    });
+</script>
 </body>
 </html>
