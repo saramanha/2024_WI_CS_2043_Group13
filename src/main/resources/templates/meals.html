@@ -17,6 +17,11 @@
             padding: 10px;
             text-align: center;
         }
+        .logo {
+            text-align: left; /* Align the logo to the left */
+            margin-bottom: -50px; /* Adjust margin as needed */
+            margin-left: 25px;
+        }
 
         h1 {
             text-align: center;
@@ -69,6 +74,9 @@
 <div layout:fragment="content">
 <div class="container">
     <div id="header">
+        <div class="logo">
+            <img th:src="@{/logo.png}" alt="Your Logo" style="max-width: 100px; height: auto;">
+        </div>
         <h1>Meals List</h1>
     </div>
 

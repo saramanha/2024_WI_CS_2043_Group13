@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<html lang="en">
 <head>
   <title>Book Sessions</title>
   <style>
@@ -16,18 +16,25 @@
       padding: 10px;
       text-align: center;
     }
-
     .image {
       text-align: center;
-      margin-top: 30px;
       margin-bottom: 50px;
       order: -1;
     }
     .image img {
-      max-width: 250px; /* Adjust the max-width as needed */
+      max-width: 300px; /* Adjust the max-width as needed */
+    }
+    .logo {
+      text-align: left; /* Align the logo to the left */
+      margin-left: 25px;
+      margin-bottom: -70px;
+    }
+    .logo img {
+      max-width: 100px; /* Adjust the max-width as needed */
+      height: auto;
     }
 
-    h3 {
+    h1 {
       text-align: center;
     }
 
@@ -67,32 +74,48 @@
   </style>
 </head>
 <body>
-<div layout:fragment="content">
-  <div id="header">
-    <h3>Book Sessions</h3>
+<div id="header">
+  <!-- Logo -->
+  <div class="logo">
+    <img th:src="@{/logo.png}" alt="Your Logo" style="max-width: 100px; height: auto;">
   </div>
-  <div class="image">
-    <img th:src="@{/session.png}" alt="meal.png" />
-  </div>
-  <form action="#" method="post">
-    <p>Member ID: <input type="text" name="memberId" /></p>
-    <p>Session Type:
-      <select name="sessionType">
-        <option value="Workout">Workout ($0)</option>
-        <option value="Sauna">Sauna ($0)</option>
-        <option value="Personal Training">Personal Training ($50)</option>
-      </select>
-    </p>
-    <p>Session Time: <input type="text" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" /></p>
-    <p>Trainer:
-      <select name="trainer">
-        <option value="Jack C">Jack C</option>
-        <option value="Kyle B">Kyle B</option>
-        <option value="Ahmed B">Ahmed B</option>
-      </select>
-    </p>
-    <p><input type="submit" value="Book Session" /> <input type="reset" value="Reset" /></p>
-  </form>
+
+  <h1>Book Sessions</h1>
 </div>
+
+<div class="image">
+  <img th:src="@{/session.png}" alt="meal.png" />
+</div>
+<form action="#" method="post">
+  <p>Member ID: <input type="text" name="memberId" /></p>
+  <p>Session Type:
+    <select name="sessionType">
+      <option value="Workout">Workout ($0)</option>
+      <option value="Sauna">Sauna ($0)</option>
+      <option value="Personal Training">Personal Training ($50)</option>
+    </select>
+  </p>
+  <p>Session Time: <input type="text" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" /></p>
+  <!-- Add personIdInput for script to work -->
+  <input id="personIdInput" type="hidden" name="personId" />
+  <p>Trainer:
+    <select name="trainer">
+      <option value="Jack C">Jack C</option>
+      <option value="Kyle B">Kyle B</option>
+      <option value="Ahmed B">Ahmed B</option>
+    </select>
+  </p>
+  <p><input type="submit" value="Book Session" /> <input type="reset" value="Reset" /></p>
+</form>
+
+<script>
+  console.log("script from add-session");
+  document.addEventListener('DOMContentLoaded', function() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.id) {
+      document.getElementById('personIdInput').value = userInfo.id;
+    }
+  });
+</script>
 </body>
 </html>
