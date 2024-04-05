@@ -66,21 +66,22 @@
 
   <label for="sessionType">Session Type:</label>
   <select id="sessionType" name="sessionType" required onchange="checkForPersonalTraining()">
-    <option value="workout">Workout</option>
-    <option value="sauna">Sauna</option>
-    <option value="personal training">Personal Training</option>
+    <option value="workout">Workout ($0)</option>
+    <option value="sauna">Sauna ($0)</option>
+    <option value="personal training">Personal Training ($50)</option>
   </select>
 
   <label for="sessionTime">Session Time:</label>
   <input type="text" id="sessionTime" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" required>
 
+  <input type="hidden" id="cost" name="cost" value="0"> <!-- Hidden cost input -->
+
   <!-- Trainer dropdown, initially hidden -->
   <div id="trainerSelection" style="display: none;">
     <label for="trainer">Trainer:</label>
     <select id="trainer" name="trainer">
-      <!-- dynamically generate these? -->
       <option value="Jack C">Jack C</option>
-      <option value="Kyle A">Kyle A</option>
+      <option value="Kyle B">Kyle B</option>
       <option value="Ahmed B">Ahmed B</option>
     </select>
   </div>
@@ -88,18 +89,23 @@
   <input type="submit" value="Add Session">
 </form>
 
+
 <script>
   function checkForPersonalTraining() {
     var sessionType = document.getElementById("sessionType").value;
     var trainerSelectionDiv = document.getElementById("trainerSelection");
     var trainerSelect = document.getElementById("trainer");
+    var costInput = document.getElementById("cost");
 
+    // Update trainer selection visibility
     if (sessionType === "personal training") {
       trainerSelectionDiv.style.display = "block";
-      trainerSelect.setAttribute('name', 'trainer'); // Ensure the select has the name 'trainer' so its value is included in the form submission
+      trainerSelect.setAttribute('name', 'trainer'); // Include trainer in form submission
+      costInput.value = 50; // Set cost for personal training
     } else {
       trainerSelectionDiv.style.display = "none";
-      trainerSelect.removeAttribute('name'); // Remove the name attribute so that it's not included in the form submission
+      trainerSelect.removeAttribute('name');
+      costInput.value = 0;
     }
   }
   document.addEventListener('DOMContentLoaded', function() {
