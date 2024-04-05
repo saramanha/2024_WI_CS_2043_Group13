@@ -24,11 +24,6 @@ public class TrainingSession {
     private long personId;
 
     /**
-     * The ID number for the member booking a session.
-     */
-    private long memberID;
-
-    /**
      * The type of session.
      */
     private String sessionType;
@@ -38,29 +33,34 @@ public class TrainingSession {
      */
     private String sessionTime;
 
-    /**
-     * The starting point for session ID's.
-     */
-    private static int assignedID = 100;
+    private double cost;
+
+    private String trainer = "N/A";
 
     public TrainingSession(){
 
     }
     /**
      * This method constructs a session containing the ID, type, and time of a session.
-     * @param memberIDIn The ID number of the member booking a session.
+     * @param personId The ID number of the member booking a session.
      * @param typeIn The type of session.
      * @param timeIn The time of a session.
      */
-    public TrainingSession(int memberIDIn, String typeIn, String timeIn) {
-        sessionID = assignedID;
-        memberID = memberIDIn;
+    public TrainingSession(long personId, String typeIn, String timeIn, int cost) {
+        this.personId = personId;
         sessionType = typeIn;
         sessionTime = timeIn;
-        assignedID++;
+        this.cost = cost;
+    }
+    public TrainingSession(long personId, String typeIn, String timeIn, int cost, String trainer) {
+        this.personId = personId;
+        sessionType = typeIn;
+        sessionTime = timeIn;
+        this.cost = cost;
+        this.trainer = trainer;
     }
     public String toString() {
-        return "Session Info:" + "\n Type: " + sessionType + " For member " + memberID + "\n Time: " + sessionTime + "\n Cost: " + getSessionCost();
+        return "Session Info:" + "\n Type: " + sessionType + " For member " + personId + "\n Time: " + sessionTime + "\n Cost: " + getCost();
     }
     /**
      * This method retrieves the ID number of a session.
@@ -102,20 +102,7 @@ public class TrainingSession {
         sessionTime = updatedTime;
     }
 
-    /**
-     * This method retrieves the cost of a session, which is dependent on the type of session.
-     * @return The cost of a session.
-     */
-    public double getSessionCost() {
-        double cost = 50.0;
-        if(sessionType.toLowerCase().equals("private")) {
-            cost = 65.0;
-            return cost;
-        }
-        else {
-            return cost;
-        }
-    }
+
 
     /**
      * This method retrieves all the information about a session.
@@ -126,6 +113,14 @@ public class TrainingSession {
                 "\n  Session Type: " + sessionType + "\n  Session Time: " + sessionTime;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     public Long getPersonId(){
         return personId;
     }
@@ -133,11 +128,12 @@ public class TrainingSession {
         personId = personIdIn;
     }
 
-    public long getMemberID() {
-        return memberID;
+    public String getTrainer() {
+        return trainer;
     }
 
-    public void setMemberID(long memberIDin) {
-        memberID = memberIDin;
+    public void setTrainer(String trainer) {
+        this.trainer = trainer;
     }
+
 }

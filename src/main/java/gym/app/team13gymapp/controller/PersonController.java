@@ -35,6 +35,8 @@ public class PersonController {
 
     @PostMapping("/persons/add")
     public String addPerson(Person person) {
+        double spend = "Gold".equals(person.getType()) ? 1000 : 750;
+        person.setSpend(spend);
         personRepository.save(person);
         return "redirect:/persons";
     }
