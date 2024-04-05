@@ -1,7 +1,9 @@
 package gym.app.team13gymapp.controller;
 
 import gym.app.team13gymapp.model.Person;
+import gym.app.team13gymapp.model.Transaction;
 import gym.app.team13gymapp.repository.PersonRepository;
+import gym.app.team13gymapp.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PersonController {
 
     private final PersonRepository personRepository;
+    private final TransactionRepository transactionRepository;
 
     @Autowired
-    public PersonController(PersonRepository personRepository) {
+    public PersonController(PersonRepository personRepository, TransactionRepository transactionRepository) {
         this.personRepository = personRepository;
+        this.transactionRepository = transactionRepository;
     }
-
     @GetMapping("/persons")
     public String showPersonList(Model model) {
         model.addAttribute("persons", personRepository.findAll());
@@ -38,6 +41,8 @@ public class PersonController {
         double spend = "Gold".equals(person.getType()) ? 1000 : 750;
         person.setSpend(spend);
         personRepository.save(person);
+        Transaction transaction = new Transaction("signup", spend, person.getId());
+        transactionRepository.save(transaction);
         return "redirect:/persons";
     }
 
