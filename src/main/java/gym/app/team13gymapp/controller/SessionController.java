@@ -1,6 +1,8 @@
 package gym.app.team13gymapp.controller;
 
+import gym.app.team13gymapp.model.Person;
 import gym.app.team13gymapp.model.TrainingSession;
+import gym.app.team13gymapp.repository.PersonRepository;
 import gym.app.team13gymapp.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class SessionController {
 
     private final SessionRepository sessionRepository;
+    private final PersonRepository personRepository;
 
     @Autowired
-    public SessionController(SessionRepository sessionRepository) {
+    public SessionController(SessionRepository sessionRepository, PersonRepository personRepository) {
         this.sessionRepository = sessionRepository;
+        this.personRepository = personRepository;
     }
 
     @GetMapping("/sessions")
@@ -33,6 +37,13 @@ public class SessionController {
     @PostMapping("/sessions/add")
     public String addSession(@ModelAttribute TrainingSession trainingSession) {
         sessionRepository.save(trainingSession);
+        //update person spend based on session cost
+        Person person = personRepository.findById(trainingSession.getPersonId()).orElse(null);
+        if (person != null) {
+            double updatedSpend = person.getSpend() + trainingSession.getCost();
+            person.setSpend(updatedSpend);
+            personRepository.save(person);
+        }
         return "redirect:/sessions";
     }
 
