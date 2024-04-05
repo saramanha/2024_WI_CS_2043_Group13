@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div id="header">
+            <h1>Invoice</h1>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Transaction Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.txNumber}">ID</td>
+                <td th:text="${transaction.txName}">Transaction Name</td>
+                <td th:text="${transaction.price}">Price</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h2 style="text-align: center;">Total Spend: <span th:text="${totalSpend}">0</span></h2>
+    </div>
+</div>
+</body>
+</html>

@@ -1,7 +1,11 @@
 package gym.app.team13gymapp.controller;
 
 import gym.app.team13gymapp.model.Meal;
+import gym.app.team13gymapp.model.Person;
+import gym.app.team13gymapp.model.Transaction;
 import gym.app.team13gymapp.repository.MealRepository;
+import gym.app.team13gymapp.repository.PersonRepository;
+import gym.app.team13gymapp.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +17,14 @@ import java.util.ArrayList;
 public class MealController {
 
     private final MealRepository mealRepository;
+    private final PersonRepository personRepository;
+    private final TransactionRepository transactionRepository;
 
     @Autowired
-    public MealController(MealRepository mealRepository) {
+    public MealController(MealRepository mealRepository, PersonRepository personRepository, TransactionRepository transactionRepository) {
         this.mealRepository = mealRepository;
+        this.personRepository = personRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @GetMapping("/meals")
@@ -42,6 +50,15 @@ public class MealController {
     @PostMapping("/meals/add")
     public String addMeal(@ModelAttribute("meal") Meal meal) {
         mealRepository.save(meal);
+        Person person = personRepository.findById(meal.getPersonId()).orElse(null);
+        if (person != null) {
+            // Determine cost based on the user type and send tx
+            double cost = "Gold".equals(person.getType()) ? 10 : 20;
+            double updatedSpend = person.getSpend() + cost;
+            person.setSpend(updatedSpend);
+            Transaction transaction = new Transaction("meal", cost, meal.getPersonId());
+            transactionRepository.save(transaction);
+        }
         return "redirect:/meals?personId=" + meal.getPersonId();
     }
 

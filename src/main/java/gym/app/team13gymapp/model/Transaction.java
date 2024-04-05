@@ -26,6 +26,10 @@ public class Transaction {
         this.personId = personId;
     }
 
+    public int getTxNumber() {
+        return txNumber;
+    }
+
     public Long getPersonId(){
         return personId;
     }

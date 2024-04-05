@@ -2,8 +2,10 @@ package gym.app.team13gymapp.controller;
 
 import gym.app.team13gymapp.model.Person;
 import gym.app.team13gymapp.model.TrainingSession;
+import gym.app.team13gymapp.model.Transaction;
 import gym.app.team13gymapp.repository.PersonRepository;
 import gym.app.team13gymapp.repository.SessionRepository;
+import gym.app.team13gymapp.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,13 @@ public class SessionController {
 
     private final SessionRepository sessionRepository;
     private final PersonRepository personRepository;
+    private final TransactionRepository transactionRepository;
 
     @Autowired
-    public SessionController(SessionRepository sessionRepository, PersonRepository personRepository) {
+    public SessionController(SessionRepository sessionRepository, PersonRepository personRepository, TransactionRepository transactionRepository) {
         this.sessionRepository = sessionRepository;
         this.personRepository = personRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @GetMapping("/sessions")
@@ -47,9 +51,12 @@ public class SessionController {
         //update person spend based on session cost
         Person person = personRepository.findById(trainingSession.getPersonId()).orElse(null);
         if (person != null) {
-            double updatedSpend = person.getSpend() + trainingSession.getCost();
+            double sessionCost = "Gold".equals(person.getType()) ? 50 : 35;
+            double updatedSpend = person.getSpend() + sessionCost;
             person.setSpend(updatedSpend);
             personRepository.save(person);
+            Transaction transaction = new Transaction("session", sessionCost, trainingSession.getPersonId());
+            transactionRepository.save(transaction);
         }
         return "redirect:/sessions?personId=" + trainingSession.getPersonId();
     }
