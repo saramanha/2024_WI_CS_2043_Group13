@@ -1,120 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Session</title>
+  <title>Book Sessions</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
+      background-color: #f4f4f4;
     }
 
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
+    #header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
       text-align: center;
-      margin-bottom: 20px;
+    }
+
+    .image {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 50px;
+      order: -1;
+    }
+    .image img {
+      max-width: 250px; /* Adjust the max-width as needed */
+    }
+
+    h3 {
+      text-align: center;
     }
 
     form {
-      margin-top: 20px;
+      width: 50%;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    input[type="text"], select {
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    input[type="reset"],
+    select {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
       box-sizing: border-box;
     }
 
-    input[type="submit"] {
-      padding: 10px 20px;
-      background-color: #4caf50;
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: #333;
       color: #fff;
-      border: none;
-      border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
-    input[type="submit"]:hover {
-      background-color: #45a049;
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+      background-color: #555;
     }
   </style>
 </head>
 <body>
-<form action="#" method="post">
-  <label for="personIdInput">Member ID:</label>
-  <input type="text" id="personIdInput" name="personId" required>
-
-  <label for="sessionType">Session Type:</label>
-  <select id="sessionType" name="sessionType" required onchange="checkForPersonalTraining()">
-    <option value="workout">Workout ($0)</option>
-    <option value="sauna">Sauna ($0)</option>
-    <option value="personal training">Personal Training ($50)</option>
-  </select>
-
-  <label for="sessionTime">Session Time:</label>
-  <input type="text" id="sessionTime" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" required>
-
-  <input type="hidden" id="cost" name="cost" value="0"> <!-- Hidden cost input -->
-
-  <!-- Trainer dropdown, initially hidden -->
-  <div id="trainerSelection" style="display: none;">
-    <label for="trainer">Trainer:</label>
-    <select id="trainer" name="trainer">
-      <option value="Jack C">Jack C</option>
-      <option value="Kyle B">Kyle B</option>
-      <option value="Ahmed B">Ahmed B</option>
-    </select>
+<div layout:fragment="content">
+  <div id="header">
+    <h3>Book Sessions</h3>
   </div>
-
-  <input type="submit" value="Add Session">
-</form>
-
-
-<script>
-  function checkForPersonalTraining() {
-    var sessionType = document.getElementById("sessionType").value;
-    var trainerSelectionDiv = document.getElementById("trainerSelection");
-    var trainerSelect = document.getElementById("trainer");
-    var costInput = document.getElementById("cost");
-
-    // Update trainer selection visibility
-    if (sessionType === "personal training") {
-      trainerSelectionDiv.style.display = "block";
-      trainerSelect.setAttribute('name', 'trainer'); // Include trainer in form submission
-      costInput.value = 50; // Set cost for personal training
-    } else {
-      trainerSelectionDiv.style.display = "none";
-      trainerSelect.removeAttribute('name');
-      costInput.value = 0;
-    }
-  }
-  document.addEventListener('DOMContentLoaded', function() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (userInfo && userInfo.id) {
-      document.getElementById('personIdInput').value = userInfo.id;
-    }
-  });
-</script>
-
+  <div class="image">
+    <img th:src="@{/session.png}" alt="meal.png" />
+  </div>
+  <form action="#" method="post">
+    <p>Member ID: <input type="text" name="memberId" /></p>
+    <p>Session Type:
+      <select name="sessionType">
+        <option value="Workout">Workout ($0)</option>
+        <option value="Sauna">Sauna ($0)</option>
+        <option value="Personal Training">Personal Training ($50)</option>
+      </select>
+    </p>
+    <p>Session Time: <input type="text" name="sessionTime" placeholder="YYYY-MM-DD HH:MM" /></p>
+    <p>Trainer:
+      <select name="trainer">
+        <option value="Jack C">Jack C</option>
+        <option value="Kyle B">Kyle B</option>
+        <option value="Ahmed B">Ahmed B</option>
+      </select>
+    </p>
+    <p><input type="submit" value="Book Session" /> <input type="reset" value="Reset" /></p>
+  </form>
+</div>
 </body>
 </html>

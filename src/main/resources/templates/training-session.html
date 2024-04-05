@@ -58,7 +58,6 @@
     <table>
         <thead>
         <tr>
-            <th>Member ID</th>
             <th>Session Type</th>
             <th>Session Time</th>
             <th>Trainer</th>
@@ -66,7 +65,6 @@
         </thead>
         <tbody>
         <tr th:each="trainingSession : ${sessions}">
-            <td th:text="${trainingSession.personId}"></td>
             <td th:text="${trainingSession.sessionType}"></td>
             <td th:text="${trainingSession.sessionTime}"></td>
             <td th:text="${trainingSession.trainer}"></td>

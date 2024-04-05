@@ -72,15 +72,12 @@
         <h1>Meals List</h1>
     </div>
 
-    <img th:src="@{/add-meal.png}" alt="hello"/>
-
     <table>
         <thead>
         <tr>
             <th>Main Food</th>
             <th>Side</th>
             <th>Calories</th>
-            <th>Person ID</th>
         </tr>
         </thead>
         <tbody>
@@ -88,7 +85,6 @@
             <td th:text="${meal.food}">Main Food</td>
             <td th:text="${meal.side}">Side</td>
             <td th:text="${meal.calories}">Calories</td>
-            <td th:text="${meal.personId}">PersonId</td>
         </tr>
         </tbody>
     </table>
