@@ -3,12 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Layout</title>
+    <style>
+        /* CSS for the navigation menu */
+        nav {
+            background-color: #333; /* Background color for the navigation bar */
+            padding: 10px 0; /* Add some padding to the top and bottom */
+        }
+
+        ul {
+            list-style-type: none; /* Remove bullet points from the list */
+            margin: 0;
+            padding: 0;
+            text-align: center; /* Align the list items to the center */
+        }
+
+        li {
+            display: inline-block; /* Display list items horizontally */
+            margin-right: 20px; /* Add some space between list items */
+        }
+
+        li:last-child {
+            margin-right: 0; /* Remove margin from the last list item */
+        }
+
+        a {
+            color: #fff; /* Text color for the links */
+            text-decoration: none; /* Remove underlines from the links */
+            padding: 10px 20px; /* Add padding to the links */
+            border-radius: 5px; /* Add rounded corners to the links */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+        a:hover {
+            background-color: #555; /* Background color on hover */
+        }
+    </style>
 </head>
 <body>
 <nav>
     <ul>
-        <li><a class="button" th:href="@{/index}">Home</a></li>
-        <li><a class="button" th:href="@{/books/add}">Add Book</a></li>
+        <li><a th:href="@{/index}">Home</a></li>
+        <li><a th:href="@{/books/add}">Add Book</a></li>
+        <li><a th:href="@{/persons/add}">Add Person</a></li>
+        <li><a th:href="@{/sessions/add}">Book Sessions</a></li>
+        <li><a th:href="@{/meals}">Meal</a></li>
+        <li><a th:href="@{/meals/add}">Add Meal</a></li>
     </ul>
 </nav>
 

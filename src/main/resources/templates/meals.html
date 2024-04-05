@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
 <head>
     <title>Meals List</title>
     <style>
@@ -66,6 +66,7 @@
     </style>
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
     <div id="header">
         <h1>Meals List</h1>
@@ -93,6 +94,7 @@
     </table>
     <br><br>
     <a href="/meals/add" class="btn">Add New Meal</a>
+</div>
 </div>
 </body>
 </html>
